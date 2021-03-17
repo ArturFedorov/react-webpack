@@ -1,13 +1,24 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = (env ,argv) => {
-  console.log(argv.mode, 'ahackjh');
+  process.env.NODE_ENV = argv.mode;
+
   return {
     mode: argv.mode,
-    entry: './src/index.js',
+    entry: {
+      main: './src/index.js',
+      analytics: './src/analytics.js'
+    },
     output: {
-      filename: 'bundle.js',
+      filename: '[name].[contenthash].js',
       path: path.resolve(__dirname, 'build'),
-    }
+      clean: true
+    },
+    plugins: [
+      new HtmlWebpackPlugin({
+        title: 'react-webpack'
+      })
+    ]
   }
 }

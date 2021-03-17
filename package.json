@@ -4,12 +4,15 @@
   "description": "basic react typescript setup",
   "main": "/src/index.js",
   "scripts": {
-    "serve": "webpack --mode=development"
+    "serve": "webpack --mode=development",
+    "build": "webpack --mode=production"
   },
   "author": "artur.fedorov",
   "license": "ISC",
   "devDependencies": {
+    "html-webpack-plugin": "^5.3.1",
     "webpack": "^5.26.2",
-    "webpack-cli": "^4.5.0"
+    "webpack-cli": "^4.5.0",
+    "webpack-dev-server": "^3.11.2"
   }
 }
