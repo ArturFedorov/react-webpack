@@ -1,0 +1,15 @@
+{
+  "name": "react-webpack",
+  "version": "1.0.0",
+  "description": "basic react typescript setup",
+  "main": "/src/index.js",
+  "scripts": {
+    "serve": "webpack --mode=development"
+  },
+  "author": "artur.fedorov",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^5.26.2",
+    "webpack-cli": "^4.5.0"
+  }
+}
