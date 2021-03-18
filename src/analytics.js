@@ -1,3 +1,5 @@
+import React from 'react';
+
 function createAnalytics() {
   let counter = 0
   let destroyed = false
