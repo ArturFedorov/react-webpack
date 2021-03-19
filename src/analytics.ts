@@ -1,10 +1,10 @@
 import React from 'react';
 
-function createAnalytics() {
+function createAnalytics(): object {
   let counter = 0
   let destroyed = false
 
-  const listener = () => counter++
+  const listener = (): number => counter++
 
   document.addEventListener('click', listener)
 

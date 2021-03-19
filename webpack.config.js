@@ -18,10 +18,7 @@ module.exports = (env ,argv) => {
         loader: isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader
       },
       {
-        loader: 'css-loader',
-        options: {
-          sourceMap: isDevelopment
-        }
+        loader: 'css-loader'
       }
     ];
 
@@ -36,15 +33,15 @@ module.exports = (env ,argv) => {
     mode: argv.mode,
     context: path.resolve(__dirname,  'src'),
     entry: {
-      main: './index.js',
-      analytics: './analytics.js'
+      main: ['@babel/polyfill', './index.tsx'],
+      analytics: './analytics.ts'
     },
     output: {
       filename: '[name].[contenthash].js',
       path: path.resolve(__dirname, 'build')
     },
     resolve: {
-      extensions: ['.js', '.scss'],
+      extensions: ['.js','.ts', '.jsx', '.tsx', '.scss'],
       alias: {
         '@models': path.resolve(__dirname, '/shared/models'),
         '@': path.resolve(__dirname, 'src')
@@ -55,10 +52,7 @@ module.exports = (env ,argv) => {
         {
           test: /\.s(a|c)ss$/,
           use: cssLoaders({
-            loader: 'sass-loader',
-            options: {
-              sourceMap: isDevelopment
-            }
+            loader: 'sass-loader'
           })
         },
         {
@@ -80,9 +74,23 @@ module.exports = (env ,argv) => {
           }
         },
         {
-          test: /\.js$/,
+          test: /\.(js|jsx|ts|tsx)$/,
           exclude: /node_modules/,
-          loader: 'babel-loader'
+          use: [
+            {
+              loader: 'babel-loader',
+              options: {
+                presets: [
+                  '@babel/preset-env',
+                  '@babel/preset-react',
+                  '@babel/preset-typescript'
+                ],
+                plugins: [
+                  '@babel/plugin-proposal-class-properties'
+                ]
+              }
+            }
+          ]
         }
       ]
     },
@@ -125,6 +133,7 @@ module.exports = (env ,argv) => {
         chunkFilename: isDevelopment ? '[id].css' : '[id].[hash].css'
       })
     ],
+    devtool: isDevelopment ? 'source-map' : '',
     devServer: {
       port: 5000,
       hot: isDevelopment

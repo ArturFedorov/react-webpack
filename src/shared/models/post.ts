@@ -1,4 +1,8 @@
 export default class Post {
+  title;
+  img;
+  date;
+
   constructor(title, img) {
     this.title = title;
     this.img = img;
